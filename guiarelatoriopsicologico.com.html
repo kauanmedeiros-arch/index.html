@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia do Monitor — Documentos Escritos em Psicologia (Res. CFP 06/2019)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE6D6;
+    --paper-dark:#E1D6B8;
+    --card:#F7F3E8;
+    --ink:#20263A;
+    --ink-soft:#4A5170;
+    --stamp:#9C2B1F;
+    --stamp-soft:#C6564A;
+    --sage:#4E5C48;
+    --sage-soft:#E4E7DC;
+    --line:#C9BB94;
+    --line-soft:#DCD2B2;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    color:var(--ink);
+    margin:0 0 .4em 0;
+    line-height:1.15;
+    font-weight:600;
+  }
+  a{color:var(--stamp);}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* ---------- layout shell ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  @media (max-width:880px){
+    .shell{grid-template-columns:1fr;}
+  }
+
+  /* ---------- sidebar (folder tabs) ---------- */
+  .sidebar{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    padding:28px 0 28px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  @media (max-width:880px){
+    .sidebar{
+      position:sticky;
+      height:auto;
+      padding:0;
+      flex-direction:row;
+      overflow-x:auto;
+      background:var(--paper-dark);
+      border-bottom:2px solid var(--line);
+      z-index:20;
+      gap:0;
+    }
+  }
+  .sidebar .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+    padding:0 14px 16px 4px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:10px;
+  }
+  @media (max-width:880px){ .brand{display:none;} }
+  .tab{
+    display:block;
+    padding:10px 16px;
+    margin-left:4px;
+    font-size:.92rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    background:var(--paper-dark);
+    border:1px solid var(--line);
+    border-right:none;
+    border-radius:8px 0 0 8px;
+    white-space:nowrap;
+    transition:background .15s, color .15s, transform .1s;
+  }
+  @media (max-width:880px){
+    .tab{
+      border-radius:0;
+      border:none;
+      border-right:1px solid var(--line);
+      margin-left:0;
+      padding:12px 14px;
+    }
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.active{
+    background:var(--card);
+    color:var(--ink);
+    font-weight:600;
+    border-color:var(--line);
+  }
+  @media (min-width:881px){
+    .tab.active{ transform:translateX(3px); }
+  }
+
+  /* ---------- main content ---------- */
+  main{ background:var(--card); min-height:100vh; }
+  .page{ max-width:var(--maxw); margin:0 auto; padding:56px 32px 40px; }
+  @media (max-width:560px){ .page{padding:36px 18px 30px;} }
+
+  section{ padding:56px 0; border-bottom:1px solid var(--line-soft); }
+  section:last-of-type{ border-bottom:none; }
+
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    color:var(--stamp);
+    margin-bottom:10px;
+  }
+  h2{ font-size:1.7rem; }
+  h3{ font-size:1.2rem; margin-top:1.4em; }
+  p{ margin:.7em 0; }
+  ul, ol{ padding-left:1.3em; }
+  li{ margin:.35em 0; }
+
+  /* ---------- hero / cover ---------- */
+  .hero{
+    padding:64px 32px 40px;
+    max-width:var(--maxw);
+    margin:0 auto;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hero .stamp-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.05em;
+    color:var(--stamp);
+    border:1.5px solid var(--stamp-soft);
+    padding:5px 10px;
+    border-radius:3px;
+    transform:rotate(-1.5deg);
+    margin-bottom:22px;
+  }
+  .hero h1{ font-size:2.5rem; max-width:11ch; }
+  @media (max-width:560px){ .hero h1{font-size:1.9rem;} }
+  .hero .lede{ font-size:1.08rem; color:var(--ink-soft); max-width:56ch; margin-top:14px; }
+  .hero .meta{
+    margin-top:28px;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    font-size:.85rem;
+    color:var(--ink-soft);
+  }
+  .hero .meta div span{ display:block; font-family:'IBM Plex Mono', monospace; color:var(--ink); font-size:.95rem; }
+
+  /* ---------- callouts ---------- */
+  .note{
+    background:var(--sage-soft);
+    border-left:3px solid var(--sage);
+    padding:14px 18px;
+    border-radius:0 6px 6px 0;
+    margin:1.2em 0;
+    font-size:.95rem;
+  }
+  .note strong{ color:var(--sage); }
+  .warn{
+    background:#F3E4DF;
+    border-left:3px solid var(--stamp);
+    padding:14px 18px;
+    border-radius:0 6px 6px 0;
+    margin:1.2em 0;
+    font-size:.95rem;
+  }
+  .warn strong{ color:var(--stamp); }
+
+  /* ---------- document map cards ---------- */
+  .doc-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-top:24px;
+  }
+  @media (max-width:720px){ .doc-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .doc-grid{grid-template-columns:1fr;} }
+  .doc-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px;
+    position:relative;
+  }
+  .doc-card.focus{
+    border:2px solid var(--stamp);
+    background:#FBEFE9;
+  }
+  .doc-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    color:var(--ink-soft);
+    letter-spacing:.03em;
+  }
+  .doc-card h4{ font-size:1.02rem; margin:.3em 0 .4em; }
+  .doc-card p{ font-size:.87rem; margin:.3em 0; color:var(--ink-soft); }
+  .doc-card .badge{
+    position:absolute;
+    top:-9px;
+    right:12px;
+    background:var(--stamp);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.62rem;
+    padding:3px 8px;
+    border-radius:3px;
+    letter-spacing:.03em;
+  }
+
+  /* ---------- step tabs (relatório structure) ---------- */
+  .steps{
+    display:flex;
+    gap:6px;
+    margin:28px 0 0;
+    flex-wrap:wrap;
+  }
+  .step-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.82rem;
+    background:var(--paper);
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    padding:9px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:all .15s;
+  }
+  .step-btn:hover{ border-color:var(--stamp-soft); color:var(--ink); }
+  .step-btn.active{
+    background:var(--ink);
+    color:var(--paper);
+    border-color:var(--ink);
+  }
+  .step-panels{
+    margin-top:20px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--paper);
+    padding:26px;
+  }
+  @media (max-width:560px){ .step-panels{padding:18px;} }
+  .step-panel{ display:none; }
+  .step-panel.active{ display:block; }
+  .step-panel .step-num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--stamp);
+    font-size:.78rem;
+    letter-spacing:.05em;
+  }
+  .step-panel h3{ margin-top:.2em; }
+  .step-panel .cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:18px;
+  }
+  @media (max-width:640px){ .step-panel .cols{grid-template-columns:1fr;} }
+  .step-panel .cols h5{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  .step-panel .cols ul{ margin:0; padding-left:1.2em; font-size:.92rem; }
+
+  /* ---------- comparison table ---------- */
+  .compare{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:.92rem;
+  }
+  .compare th, .compare td{
+    border:1px solid var(--line);
+    padding:12px 14px;
+    text-align:left;
+    vertical-align:top;
+  }
+  .compare th{
+    background:var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.75rem;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+  }
+  .compare td:first-child{ font-weight:600; width:26%; }
+
+  /* ---------- accordion (outros documentos) ---------- */
+  .acc-item{
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:10px;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .acc-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 18px;
+    cursor:pointer;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.02rem;
+  }
+  .acc-head .plus{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--stamp);
+    font-size:1.1rem;
+    transition:transform .2s;
+  }
+  .acc-item.open .plus{ transform:rotate(45deg); }
+  .acc-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    padding:0 18px;
+  }
+  .acc-item.open .acc-body{ padding:0 18px 18px; }
+  .acc-body p{ font-size:.92rem; }
+  .acc-body ul{ font-size:.92rem; }
+
+  /* ---------- checklist ---------- */
+  .checklist{ list-style:none; padding:0; margin-top:18px; }
+  .checklist li{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:10px 0;
+    border-bottom:1px solid var(--line-soft);
+    font-size:.95rem;
+  }
+  .checklist li::before{
+    content:"";
+    flex:0 0 18px;
+    width:18px;
+    height:18px;
+    border:1.5px solid var(--stamp);
+    border-radius:4px;
+    margin-top:2px;
+  }
+
+  footer{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:30px 32px 60px;
+    font-size:.8rem;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="brand">RES. CFP 06/2019</div>
+    <a class="tab" href="#principios">Princípios</a>
+    <a class="tab" href="#mapa">Mapa dos documentos</a>
+    <a class="tab" href="#relatorio">Relatório Psicológico</a>
+    <a class="tab" href="#comparacao">Relatório × Laudo</a>
+    <a class="tab" href="#outros">Outras modalidades</a>
+    <a class="tab" href="#checklist">Checklist final</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <span class="stamp-tag">Material de apoio · Monitoria Documentos Psicológicos</span>
+      <h1>Como redigir documentos psicológicos</h1>
+      <p class="lede">Um guia prático da Resolução CFP n.º 06/2019 para quem está começando os estágios — com foco especial em como estruturar um <strong>Relatório Psicológico</strong>.</p>
+      <div class="meta">
+        <div>Base normativa <span>Res. CFP 06/2019</span></div>
+        <div>Documentos cobertos <span>6 modalidades</span></div>
+        <div>Foco do guia <span>Relatório Psicológico</span></div>
+      </div>
+    </div>
+
+    <div class="page">
+
+      <section id="principios">
+        <div class="kicker">ANTES DE ESCREVER QUALQUER COISA</div>
+        <h2>O que é um documento psicológico</h2>
+        <p>Segundo o Art. 4.º da Resolução, todo documento psicológico é um <strong>instrumento de comunicação escrita</strong> que resulta da prestação de um serviço de Psicologia a uma pessoa, grupo ou instituição. Ele nasce de uma solicitação — da própria pessoa atendida, de responsáveis legais, de outro profissional, de uma equipe ou de uma autoridade — ou do encerramento de um processo de avaliação psicológica.</p>
+        <p>Três blocos de princípios sustentam qualquer documento que você for produzir no estágio:</p>
+
+        <h3>1. Princípios técnicos (Art. 5.º)</h3>
+        <ul>
+          <li>O conteúdo precisa ser fidedigno e validar o raciocínio psicológico que você está comunicando.</li>
+          <li>Todo fenômeno psicológico é dinâmico — evite linguagem que "cristalize" a pessoa atendida como se o quadro descrito fosse definitivo.</li>
+          <li>Referências teóricas vão preferencialmente em nota de rodapé.</li>
+          <li>Toda página deve ser numerada e rubricada até a penúltima lauda, com assinatura na última.</li>
+        </ul>
+
+        <h3>2. Princípios de linguagem técnica (Art. 6.º)</h3>
+        <ul>
+          <li>Escreva na <strong>terceira pessoa</strong>, de forma impessoal.</li>
+          <li>Use a norma culta da língua portuguesa e busque objetividade — frases e parágrafos devem se encadear em uma sequência lógica de raciocínio, não em blocos soltos.</li>
+          <li>Evite descrições literais dos atendimentos, a menos que isso se justifique tecnicamente para o que está sendo comunicado.</li>
+        </ul>
+
+        <h3>3. Princípios éticos (Art. 7.º)</h3>
+        <ul>
+          <li>Sigilo profissional sempre — inclusive diante de equipes interdisciplinares, da justiça e de políticas públicas.</li>
+          <li>É vedado usar instrumentos e técnicas para sustentar qualquer forma de segregação ou discriminação.</li>
+          <li>A pessoa atendida tem direito a receber informações sobre o serviço prestado e a ter acesso ao documento produzido.</li>
+          <li>Você responde ética, civil e criminalmente pelo que constar no documento — não é só uma formalidade acadêmica.</li>
+        </ul>
+
+        <div class="note"><strong>Para o estágio:</strong> antes de entregar qualquer documento ao seu supervisor, pergunte-se: isso está fidedigno ao que foi observado, está em terceira pessoa, e eu conseguiria sustentar tecnicamente cada afirmação que fiz?</div>
+      </section>
+
+      <section id="mapa">
+        <div class="kicker">VISÃO GERAL</div>
+        <h2>As seis modalidades de documentos (Art. 8.º)</h2>
+        <p>Antes de aprofundar no Relatório, é importante enxergar onde ele se encaixa entre as demais modalidades — a escolha errada de documento é um dos erros mais comuns de quem está começando.</p>
+
+        <div class="doc-grid">
+          <div class="doc-card">
+            <div class="tag">01 · Declaração</div>
+            <h4>Declaração</h4>
+            <p>Registro objetivo de comparecimento e acompanhamento. Nunca contém sintomas ou estados psicológicos.</p>
+          </div>
+          <div class="doc-card">
+            <div class="tag">02 · Atestado</div>
+            <h4>Atestado Psicológico</h4>
+            <p>Certifica uma condição a partir de um diagnóstico psicológico. Justifica faltas, aptidão ou afastamento.</p>
+          </div>
+          <div class="doc-card focus">
+            <span class="badge">FOCO DESTE GUIA</span>
+            <div class="tag">03 · Relatório</div>
+            <h4>Relatório Psicológico</h4>
+            <p>Descreve uma atuação já realizada ou em desenvolvimento. Não tem finalidade de produzir diagnóstico.</p>
+          </div>
+          <div class="doc-card">
+            <div class="tag">04 · Relatório Multi.</div>
+            <h4>Relatório Multiprofissional</h4>
+            <p>Mesma lógica do Relatório, mas construído com outras categorias profissionais.</p>
+          </div>
+          <div class="doc-card">
+            <div class="tag">05 · Laudo</div>
+            <h4>Laudo Psicológico</h4>
+            <p>Resultado de um processo de avaliação psicológica. Pode trazer diagnóstico e prognóstico.</p>
+          </div>
+          <div class="doc-card">
+            <div class="tag">06 · Parecer</div>
+            <h4>Parecer Psicológico</h4>
+            <p>Resposta técnica a uma questão-problema ou a um documento questionado. Não decorre de avaliação própria.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="relatorio">
+        <div class="kicker">Art. 11 DA RESOLUÇÃO</div>
+        <h2>Relatório Psicológico, passo a passo</h2>
+        <p>O Relatório é uma exposição escrita, descritiva e circunstanciada da atuação da(o) psicóloga(o), considerando os condicionantes históricos e sociais da pessoa, grupo ou instituição atendida. Ele pode gerar orientações, recomendações e encaminhamentos — mas <strong>não tem como finalidade produzir diagnóstico psicológico</strong>. Isso é o que mais diferencia o Relatório do Laudo.</p>
+
+        <div class="warn"><strong>Erro comum:</strong> transformar o Relatório em uma transcrição do prontuário. A norma é clara — o Relatório se baseia no registro documental, mas não é sua cópia ou sistematização literal.</div>
+
+        <p>A estrutura tem cinco partes obrigatórias. Clique em cada uma para ver o que entra nela, com base nos §§ do Art. 11 e nos comentários oficiais da Resolução:</p>
+
+        <div class="steps" id="stepNav">
+          <button class="step-btn active" data-step="1">1 · Identificação</button>
+          <button class="step-btn" data-step="2">2 · Descrição da demanda</button>
+          <button class="step-btn" data-step="3">3 · Procedimento</button>
+          <button class="step-btn" data-step="4">4 · Análise</button>
+          <button class="step-btn" data-step="5">5 · Conclusão</button>
+        </div>
+
+        <div class="step-panels">
+          <div class="step-panel active" data-panel="1">
+            <div class="step-num">PASSO 1</div>
+            <h3>Identificação</h3>
+            <p>É o "cabeçalho" formal do documento. Cinco informações são obrigatórias:</p>
+            <div class="cols">
+              <div>
+                <h5>O que incluir</h5>
+                <ul>
+                  <li>Título: "Relatório Psicológico"</li>
+                  <li>Nome completo (ou nome social) da pessoa ou instituição atendida</li>
+                  <li>Nome de quem solicitou o documento (Judiciário, empresa, a própria pessoa atendida, etc.)</li>
+                  <li>Finalidade — o motivo do pedido</li>
+                  <li>Nome da(o) autora(or) com o número de inscrição no CRP</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Pontos de Atenção</h5>
+                <ul>
+                  <li>A finalidade não é um detalhe burocrático: é o que resguarda você quanto ao uso posterior do documento.</li>
+                  <li>Sempre especifique de onde veio a solicitação.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="2">
+            <div class="step-num">PASSO 2</div>
+            <h3>Descrição da demanda</h3>
+            <p>Aqui você conta o que motivou a busca pelo processo de trabalho: quem forneceu as informações e qual demanda originou o pedido do documento.</p>
+            <div class="cols">
+              <div>
+                <h5>O que incluir</h5>
+                <ul>
+                  <li>O contexto que originou o atendimento</li>
+                  <li>Quem forneceu as informações (a própria pessoa, um responsável, outro serviço...)</li>
+                  <li>A demanda que levou à solicitação deste documento específico</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Pontos de Atenção</h5>
+                <ul>
+                  <li>Este item é obrigatório e precisa justificar os procedimentos que você vai descrever no próximo item — não pule direto para o procedimento sem contextualizar a demanda.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="3">
+            <div class="step-num">PASSO 3</div>
+            <h3>Procedimento</h3>
+            <p>É onde você apresenta o raciocínio técnico-científico que justifica o processo de trabalho e os recursos utilizados.</p>
+            <div class="cols">
+              <div>
+                <h5>O que incluir</h5>
+                <ul>
+                  <li>O referencial teórico-metodológico que fundamenta suas análises</li>
+                  <li>Quem foi ouvido no processo (pessoas envolvidas)</li>
+                  <li>Número de encontros e tempo de duração do processo</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Pontos de Atenção</h5>
+                <ul>
+                  <li>Os procedimentos precisam ser pertinentes à complexidade real da demanda — não use um procedimento "genérico" copiado de outro relatório.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="4">
+            <div class="step-num">PASSO 4</div>
+            <h3>Análise</h3>
+            <p>O coração técnico do documento: uma exposição descritiva, narrativa e analítica das principais características e evolução do trabalho, a partir de um pensamento sistêmico sobre os dados colhidos.</p>
+            <div class="cols">
+              <div>
+                <h5>O que incluir</h5>
+                <ul>
+                  <li>Fundamentação teórica e técnica de cada afirmação</li>
+                  <li>Apenas o que for necessário para responder à demanda</li>
+                  <li>Linguagem objetiva e precisa, especialmente ao tratar de conteúdo subjetivo</li>
+                </ul>
+              </div>
+              <div>
+                <h5>O que evitar</h5>
+                <ul>
+                  <li>Descrição literal das sessões (só se for tecnicamente justificável)</li>
+                  <li>Qualquer afirmação sem fonte ou sem sustentação em fatos/teorias</li>
+                  <li>Juízos de valor ou opiniões pessoais sem respaldo científico</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-panel" data-panel="5">
+            <div class="step-num">PASSO 5</div>
+            <h3>Conclusão</h3>
+            <p>Retoma o que foi relatado na análise, sempre considerando a natureza dinâmica e não cristalizada do que foi estudado.</p>
+            <div class="cols">
+              <div>
+                <h5>O que incluir</h5>
+                <ul>
+                  <li>Encaminhamentos, orientações ou sugestão de continuidade, quando pertinente</li>
+                  <li>Local, data, carimbo com nome completo e inscrição profissional</li>
+                  <li>Todas as laudas numeradas e rubricadas, assinatura na última página</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Boas práticas recomendadas</h5>
+                <ul>
+                  <li>Retomar a finalidade do documento</li>
+                  <li>Registrar que houve entrevista devolutiva</li>
+                  <li>Indicar prazo de validade quando fizer sentido para o conteúdo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Sobre a linguagem no Relatório</h3>
+        <p>Vale reforçar: o Relatório é uma peça técnico-científica, mas precisa ser <strong>acessível e compreensível</strong> a quem vai lê-lo — muitas vezes alguém fora da Psicologia. Narrativa detalhada e didática não é sinônimo de informalidade; é sinônimo de clareza.</p>
+      </section>
+
+      <section id="comparacao">
+        <div class="kicker">A DÚVIDA MAIS FREQUENTE DO ESTÁGIO</div>
+        <h2>Relatório ou Laudo?</h2>
+        <p>Essa é a distinção que mais gera dúvida em quem está começando. A Resolução separou os dois documentos justamente para isso.</p>
+        <table class="compare">
+          <tr>
+            <th></th>
+            <th>Relatório Psicológico</th>
+            <th>Laudo Psicológico</th>
+          </tr>
+          <tr>
+            <td>Origem</td>
+            <td>Atuação profissional já realizada ou em desenvolvimento</td>
+            <td>Resultado de um processo de avaliação psicológica</td>
+          </tr>
+          <tr>
+            <td>Finalidade</td>
+            <td>Comunicar a atuação; pode ter caráter informativo</td>
+            <td>Subsidiar decisões relacionadas à demanda que originou a avaliação</td>
+          </tr>
+          <tr>
+            <td>Diagnóstico</td>
+            <td>Não tem essa finalidade</td>
+            <td>Pode apresentar diagnóstico, prognóstico e hipótese diagnóstica</td>
+          </tr>
+          <tr>
+            <td>Estrutura</td>
+            <td>5 itens: Identificação, Descrição da demanda, Procedimento, Análise, Conclusão</td>
+            <td>6 itens: os mesmos 5 + Referências obrigatórias</td>
+          </tr>
+          <tr>
+            <td>Exemplos de uso</td>
+            <td>Visita domiciliar, encaminhamento, acolhimento pontual, pedido de ampliação de sessões</td>
+            <td>Avaliação psicológica compulsória, perícia, avaliação neuropsicológica</td>
+          </tr>
+        </table>
+      </section>
+
+      <section id="outros">
+        <div class="kicker">REFERÊNCIA RÁPIDA</div>
+        <h2>As demais modalidades, em resumo</h2>
+        <p>Você não vai produzir todas essas no estágio com a mesma frequência, mas precisa reconhecer cada uma quando for solicitada.</p>
+
+        <div class="acc-item">
+          <div class="acc-head">Declaração <span class="plus">+</span></div>
+          <div class="acc-body">
+            <p>O documento psicológico mais simples e objetivo. Serve para registrar comparecimento, acompanhamento realizado (ou em realização) e informações sobre dias, horários e duração.</p>
+            <p><strong>Nunca pode conter:</strong> sintomas, estados ou qualquer informação sobre o funcionamento psicológico da pessoa atendida.</p>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">Atestado Psicológico <span class="plus">+</span></div>
+          <div class="acc-body">
+            <p>Certifica, com base em um diagnóstico psicológico, uma condição para fins de justificar faltas, atestar aptidão para atividades específicas ou subsidiar afastamento.</p>
+            <p>Diferente da Declaração, decorre de um processo de avaliação. Pode usar a CID quando justificadamente necessário — mas divulgar o número da CID exige autorização por escrito da pessoa atendida.</p>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">Relatório Multiprofissional <span class="plus">+</span></div>
+          <div class="acc-body">
+            <p>Segue a mesma estrutura de cinco itens do Relatório Psicológico, mas é produzido em conjunto com profissionais de outras áreas.</p>
+            <p><strong>Regra de ouro:</strong> os procedimentos e a análise que forem privativos da Psicologia devem aparecer em item separado dos demais profissionais, identificado com seu nome e categoria profissional — a Identificação e a Conclusão podem ser conjuntas.</p>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <div class="acc-head">Parecer Psicológico <span class="plus">+</span></div>
+          <div class="acc-body">
+            <p>Um pronunciamento técnico que responde a uma questão-problema do campo psicológico, ou avalia um documento psicológico questionado (por exemplo, em uma perícia). Exige da(o) autora(or) conhecimento específico no assunto.</p>
+            <p><strong>Importante:</strong> não decorre de avaliação ou intervenção própria — é uma análise sobre uma questão ou sobre o trabalho de outra pessoa. Sua estrutura tem 5 itens, incluindo Referências obrigatórias.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="checklist">
+        <div class="kicker">ANTES DE ENTREGAR AO SUPERVISOR</div>
+        <h2>Checklist final do Relatório Psicológico</h2>
+        <ul class="checklist">
+          <li>O documento tem os 5 itens completos: Identificação, Descrição da demanda, Procedimento, Análise e Conclusão?</li>
+          <li>A finalidade do documento está explícita na Identificação?</li>
+          <li>Todo o texto está escrito em terceira pessoa, de forma impessoal?</li>
+          <li>Nenhuma afirmação está sem fundamentação teórica ou sem fonte identificada?</li>
+          <li>Não há descrições literais de sessões, exceto onde isso se justifica tecnicamente?</li>
+          <li>A conclusão evita tratar o quadro descrito como definitivo ou cristalizado?</li>
+          <li>As laudas estão numeradas e rubricadas até a penúltima, com assinatura na última?</li>
+          <li>Consta local, data e carimbo com o número de inscrição no CRP?</li>
+          <li>Foi planejada ou realizada a entrevista devolutiva antes da entrega?</li>
+          <li>Uma cópia será arquivada, com protocolo de entrega assinado, pelo prazo mínimo de 5 anos?</li>
+        </ul>
+        <div class="note"><strong>Dica de monitoria:</strong> leia o Relatório em voz alta antes de entregar. Se uma frase soa como opinião pessoal, ou como uma cópia do prontuário, ela provavelmente precisa ser reescrita.</div>
+      </section>
+
+    </div>
+
+    <footer>
+      Material de apoio elaborado a partir da <a href="https://site.cfp.org.br/wp-content/uploads/2019/09/Resolu%C3%A7%C3%A3o-CFP-n-06-2019-comentada.pdf" target="_blank" rel="noopener">Resolução CFP n.º 06/2019</a> (Conselho Federal de Psicologia) para uso em Monitoria em Elaboração de Documentos Psicológicos. Consulte sempre o texto integral da Resolução e a orientação da sua supervisão de estágio para casos concretos.
+      <br><br>
+      Material criado em 2026 pelo Monitor Kauan Martins Medeiros (<a href="https://instagram.com/psico.kauan" target="_blank" rel="noopener">@psico.kauan</a>).
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Step tabs (estrutura do Relatório)
+  const stepBtns = document.querySelectorAll('.step-btn');
+  const stepPanels = document.querySelectorAll('.step-panel');
+  stepBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      stepBtns.forEach(b => b.classList.remove('active'));
+      stepPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.step-panel[data-panel="' + btn.dataset.step + '"]').classList.add('active');
+    });
+  });
+
+  // Accordion (outras modalidades)
+  document.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const item = head.parentElement;
+      const body = item.querySelector('.acc-body');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.acc-body').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 40 + 'px';
+      }
+    });
+  });
+
+  // Scrollspy for sidebar tabs
+  const sections = document.querySelectorAll('section[id]');
+  const tabs = document.querySelectorAll('.tab');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const tab = document.querySelector('.tab[href="#' + entry.target.id + '"]');
+      if(!tab) return;
+      if(entry.isIntersecting){
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => spy.observe(s));
+</script>
+
+</body>
+</html>
